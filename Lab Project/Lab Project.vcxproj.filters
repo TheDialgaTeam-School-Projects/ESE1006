@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{74f007c9-89ef-43d5-97b0-16c96d9525ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu\MainMenuD">
+      <UniqueIdentifier>{44f15e37-f31a-43dd-a75a-662c79a0e73f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu\MainMenuD\MainMenuD3">
+      <UniqueIdentifier>{44dfa60b-a1c0-4126-a75e-b4dd6799f072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Functions">
+      <UniqueIdentifier>{82d4b377-d5ab-4a66-b1fe-5d1543f3f8d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Functions">
+      <UniqueIdentifier>{46758bd9-7382-40d6-917d-b51242d2f287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\List&lt;T&gt;">
+      <UniqueIdentifier>{794a93eb-467e-484b-8990-f4ec940ea7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu\MainMenuD\MainMenuD4">
+      <UniqueIdentifier>{89f0f06e-700e-44bc-bd59-bf1d21c2dc7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\List&lt;T&gt;">
+      <UniqueIdentifier>{ed3db254-5c71-470e-b467-ba87729eb05f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainMenu.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuA.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuB.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuC.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD1.c">
+      <Filter>Source Files\Menu\MainMenuD</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD2.c">
+      <Filter>Source Files\Menu\MainMenuD</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.c">
+      <Filter>Source Files\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scanf.c">
+      <Filter>Source Files\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD3.c">
+      <Filter>Source Files\Menu\MainMenuD</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD3_1.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD3</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD3_2.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD3</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD3_4.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD3</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD3_3.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD3</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD4.c">
+      <Filter>Source Files\Menu\MainMenuD</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuD4_2.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD4</Filter>
+    </ClCompile>
+    <ClCompile Include="String.c">
+      <Filter>Source Files\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="List.c">
+      <Filter>Source Files\List&lt;T&gt;</Filter>
+    </ClCompile>
+    <ClCompile Include="RainfallActiveList.c">
+      <Filter>Source Files\List&lt;T&gt;</Filter>
+    </ClCompile>
+    <ClCompile Include="RainfallArrayList.c">
+      <Filter>Source Files\List&lt;T&gt;</Filter>
+    </ClCompile>
+    <ClCompile Include="RainfallCategoryList.c">
+      <Filter>Source Files\List&lt;T&gt;</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.c">
+      <Filter>Source Files\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="RainfallYearList.c">
+      <Filter>Source Files\List&lt;T&gt;</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Modules.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scanf.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomTypes.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Header Files\List&lt;T&gt;</Filter>
+    </ClInclude>
+    <ClInclude Include="RainfallArrayList.h">
+      <Filter>Header Files\List&lt;T&gt;</Filter>
+    </ClInclude>
+    <ClInclude Include="RainfallActiveList.h">
+      <Filter>Header Files\List&lt;T&gt;</Filter>
+    </ClInclude>
+    <ClInclude Include="Menus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="RainfallCategoryList.h">
+      <Filter>Header Files\List&lt;T&gt;</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="RainfallYearList.h">
+      <Filter>Header Files\List&lt;T&gt;</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
