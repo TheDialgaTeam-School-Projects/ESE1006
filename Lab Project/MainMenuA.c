@@ -11,7 +11,7 @@ void showMenuA(void)
 {
 	int i;
 	int menuOptions;
-	int expectedCount;
+	int expectedRainfallArrayCount;
 	int selectedMonth;
 	int monthRefIndex[12];
 	int numberOfMenu = 1;
@@ -44,14 +44,14 @@ void showMenuA(void)
 		else if (menuOptions < numberOfMenu)
 		{
 			selectedMonth = monthRefIndex[menuOptions - 1];
-			expectedCount = rainfallArrayListCount(0, 2014 - START_YEAR, selectedMonth);
+			expectedRainfallArrayCount = rainfallArrayListCount(0, 2014 - START_YEAR, selectedMonth);
 
-			for (i = 0; i < expectedCount; i++)
+			for (i = 0; i < expectedRainfallArrayCount; i++)
 			{
 				total += rainfallArrayListGetItem(0, 2014 - START_YEAR, selectedMonth, i);
 			}
 
-			average = total / expectedCount;
+			average = total / expectedRainfallArrayCount;
 			printf("The average rainfall for %s is %.1f mm.\n", getMonthName(selectedMonth + 1), average);
 
 			total = 0;
