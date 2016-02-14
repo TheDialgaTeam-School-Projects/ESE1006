@@ -14,7 +14,6 @@ void showMenuA(void)
 	int expectedCount;
 	int selectedMonth;
 	int monthRefIndex[12];
-	int monthRefAppendIndex = 0;
 	int numberOfMenu = 1;
 
 	float total = 0;
@@ -28,8 +27,7 @@ void showMenuA(void)
 		if (rainfallActiveListGetItem(0, 2014 - START_YEAR, i) == true)
 		{
 			printf("%d. %s\n", numberOfMenu, getMonthName(i + 1));
-			monthRefIndex[monthRefAppendIndex] = i;
-			monthRefAppendIndex++;
+			monthRefIndex[numberOfMenu - 1] = i;
 			numberOfMenu++;
 		}
 	}
@@ -41,10 +39,8 @@ void showMenuA(void)
 	{
 		menuOptions = scanInt();
 
-		if (menuOptions > numberOfMenu || menuOptions < 1)
-		{
+		if (menuOptions < 1 || menuOptions > numberOfMenu)
 			puts("\tInvalid option. Please try again!");
-		}
 		else if (menuOptions < numberOfMenu)
 		{
 			selectedMonth = monthRefIndex[menuOptions - 1];
@@ -62,8 +58,6 @@ void showMenuA(void)
 			average = 0;
 		}
 		else
-		{
 			break;
-		}
 	} while (menuOptions != numberOfMenu);
 }
