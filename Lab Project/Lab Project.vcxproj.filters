@@ -108,9 +108,6 @@
     <ClCompile Include="DateTime.c">
       <Filter>Source Files\Functions</Filter>
     </ClCompile>
-    <ClCompile Include="RainfallYearList.c">
-      <Filter>Source Files\List&lt;T&gt;</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Modules.h">
@@ -145,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="DateTime.h">
       <Filter>Header Files\Functions</Filter>
-    </ClInclude>
-    <ClInclude Include="RainfallYearList.h">
-      <Filter>Header Files\List&lt;T&gt;</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

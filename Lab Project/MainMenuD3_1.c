@@ -56,7 +56,7 @@ void showMenuD3_1(void)
 		{
 			puts("Please enter the name of the category:");
 
-			rainfallNameListAdd(scanString(1));
+			rainfallCategoryListAdd(scanString(1));
 			rainfallArrayListAdd();
 			rainfallActiveListAdd();
 

@@ -42,9 +42,9 @@ void showMenuD4_2(void)
 		{
 			for (k = 0; k < 31; k++)
 			{
-				if (rainfallArrayListGetItem(i, j, k) != -1)
+				if (rainfallArrayListGetItem(i,0, j, k) != -1)
 				{
-					fprintf(file, "%s,%d,%d,%.1f\n", rainfallCategoryListGetItem(i), j + 1, k + 1, rainfallArrayListGetItem(i, j, k));
+					fprintf(file, "%s,%d,%d,%.1f\n", rainfallCategoryListGetItem(i), j + 1, k + 1, rainfallArrayListGetItem(i,0, j, k));
 					fflush(file);
 				}
 			}

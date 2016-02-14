@@ -13,6 +13,18 @@
 
 #include "CustomTypes.h"
 
+// Start of the year value.
+#define START_YEAR 1900
+
+// End of the year value.
+#define END_YEAR 9999
+
 // Get the name of the month.
 string getMonthName(int month);
+
+// Get if the year is a leap year.
+bool isLeapYear(int year);
+
+// Get number of days in the defined month and year.
+int getDayCount(int year, int month);
 #endif

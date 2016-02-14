@@ -99,7 +99,7 @@ void rainfallCategoryListSetItem(int index, string item)
 
 #pragma region Methods
 // Adds an object to the end of the List<string>.
-void rainfallNameListAdd(string item)
+void rainfallCategoryListAdd(string item)
 {
 	int expectedCount = rainfallCategoryListCount() + 1;
 	int expectedCapacity;
@@ -118,17 +118,17 @@ void rainfallNameListAdd(string item)
 }
 
 // Removes all elements from the List<string>.
-void rainfallNameListClear(void)
+void rainfallCategoryListClear(void)
 {
 	rainfallCategoryListSetCapacity(1);
 	rainfallCategoryList.Item[0] = '\0';
 
 	// Setup Default Category.
-	rainfallNameListAdd("Default");
+	rainfallCategoryListAdd("Default");
 }
 
 // Removes the element at the specified index of the List<string>.
-void rainfallNameListRemoveAt(int index)
+void rainfallCategoryListRemoveAt(int index)
 {
 	int i;
 	int expectedCount = rainfallCategoryListCount() - 1;
@@ -139,7 +139,7 @@ void rainfallNameListRemoveAt(int index)
 
 	if (expectedCount == 0)
 	{
-		rainfallNameListClear();
+		rainfallCategoryListClear();
 		return;
 	}
 	else

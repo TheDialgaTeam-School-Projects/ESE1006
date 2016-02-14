@@ -12,8 +12,9 @@ void showMenuC(void)
 	int i;
 	int j;
 	int lowestMonth = 0;
-	float lowestRainfall = INT_MAX;
+	int expectedCount;
 
+	float lowestRainfall = INT_MAX;
 	float averageRainfall[12];
 	float total;
 
@@ -23,14 +24,16 @@ void showMenuC(void)
 	{
 		total = 0;
 
-		if (rainfallActiveListGetItem(0, i) == true)
+		if (rainfallActiveListGetItem(0, 2014 - START_YEAR, i) == true)
 		{
-			for (j = 0; j < rainfallArrayListCount(0, i); j++)
+			expectedCount = rainfallArrayListCount(0, 2014 - START_YEAR, i);
+
+			for (j = 0; j < expectedCount; j++)
 			{
-				total += rainfallArrayListGetItem(0, i, j);
+				total += rainfallArrayListGetItem(0, 2014 - START_YEAR, i, j);
 			}
 
-			averageRainfall[i] = total / rainfallArrayListCount(0, i);
+			averageRainfall[i] = total / rainfallArrayListCount(0, 2014 - START_YEAR, i);
 
 			if (lowestRainfall > averageRainfall[i])
 			{
@@ -49,11 +52,11 @@ void showMenuC(void)
 	{
 		if (averageRainfall[i] != -1)
 		{
-			printf("%10s %.1fmm\n", getMonthName(i + 1), averageRainfall[i]);
+			printf("%10s %.1f mm\n", getMonthName(i + 1), averageRainfall[i]);
 		}
 	}
 
-	printf("\nThe month with the lowest average rainfall is %s (%.1fmm).\n", getMonthName(lowestMonth), lowestRainfall);
+	printf("\nThe month with the lowest average rainfall is %s (%.1f mm).\n", getMonthName(lowestMonth), lowestRainfall);
 
 	pause();
 }

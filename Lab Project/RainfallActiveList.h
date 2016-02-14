@@ -25,13 +25,13 @@ int rainfallActiveListGetCapacity(void);
 void rainfallActiveListSetCapacity(int newCapacity);
 
 // Gets the number of elements contained in the List<bool>.
-int rainfallActiveListCount(int nameRefIndex);
+int rainfallActiveListCount(int nameRefIndex, int yearIndex);
 
 // Gets the element at the specified index.
-bool rainfallActiveListGetItem(int nameRefIndex, int monthIndex);
+bool rainfallActiveListGetItem(int nameRefIndex, int yearIndex, int monthIndex);
 
 // Sets the element at the specified index.
-void rainfallActiveListSetItem(int nameRefIndex, int monthIndex, bool item);
+void rainfallActiveListSetItem(int nameRefIndex, int yearIndex, int monthIndex, bool item);
 #pragma endregion
 
 #pragma region Methods
@@ -45,6 +45,6 @@ void rainfallActiveListInsert(int nameRefIndex);
 void rainfallActiveListClear(void);
 
 // Removes the element at the specified index of the List<bool>.
-void rainfallActiveListRemoveAt(int index);
+void rainfallActiveListRemoveAt(int nameRefIndex);
 #pragma endregion
 #endif

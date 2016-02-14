@@ -47,7 +47,7 @@ void showMenuD3_3(void)
 		}
 		else if (menuOptions < numberOfMenu - 1)
 		{
-			rainfallNameListRemoveAt(menuOptions - 1);
+			rainfallCategoryListRemoveAt(menuOptions - 1);
 			rainfallArrayListRemoveAt(menuOptions - 1);
 			rainfallActiveListRemoveAt(menuOptions - 1);
 

@@ -7,6 +7,7 @@
 #include "Modules.h"
 
 // Prototype of List<bool> in c#
+// Expected Item[Year][Month]
 
 // List<bool> rainfallActiveList;
 struct List_bool rainfallActiveList;
@@ -14,13 +15,8 @@ struct List_bool rainfallActiveList;
 // A function to setup rainfallArrayList.
 void rainfallActiveListSetup(void)
 {
-	rainfallActiveList.Item = calloc(12, sizeof(bool));
+	rainfallActiveList.Item = listInit(12, sizeof(bool));
 	rainfallActiveList.Capacity = 12;
-
-	if (rainfallActiveList.Item == '\0')
-	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
 }
 
 #pragma region Properties
@@ -33,44 +29,40 @@ int rainfallActiveListGetCapacity(void)
 // Sets the total number of elements the internal data structure can hold without resizing.
 void rainfallActiveListSetCapacity(int newCapacity)
 {
-	rainfallActiveList.Item = realloc(rainfallArrayList.Item, newCapacity * sizeof(bool));
+	rainfallActiveList.Item = listSet(rainfallActiveList.Item, newCapacity, sizeof(bool));
 	rainfallActiveList.Capacity = newCapacity;
-
-	if (rainfallActiveList.Item == '\0')
-	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
 }
 
 // Gets the number of elements contained in the List<bool>.
-int rainfallActiveListCount(int nameRefIndex)
+int rainfallActiveListCount(int nameRefIndex, int yearIndex)
 {
 	int i;
 	int returnCount = 0;
 
 	for (i = 0; i < 12; i++)
 	{
-		if (rainfallActiveListGetItem(nameRefIndex, i) == true)
+		if (rainfallActiveListGetItem(nameRefIndex, yearIndex, i) == true)
 		{
 			returnCount++;
 		}
 	}
+
 	return returnCount;
 }
 
 // Gets the element at the specified index.
-bool rainfallActiveListGetItem(int nameRefIndex, int monthIndex)
+bool rainfallActiveListGetItem(int nameRefIndex, int yearIndex, int monthIndex)
 {
-	return rainfallActiveList.Item[monthIndex + nameRefIndex * 12];
+	return rainfallActiveList.Item[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12) + (yearIndex * 12) + monthIndex];
 }
 
 // Sets the element at the specified index.
-void rainfallActiveListSetItem(int nameRefIndex, int monthIndex, bool item)
+void rainfallActiveListSetItem(int nameRefIndex, int yearIndex, int monthIndex, bool item)
 {
-	while (rainfallActiveListGetCapacity() < monthIndex + nameRefIndex * 12)
+	while ((nameRefIndex * (END_YEAR - START_YEAR + 1) * 12) + (yearIndex * 12) + monthIndex > rainfallActiveListGetCapacity())
 		rainfallActiveListAdd();
 
-	rainfallActiveList.Item[monthIndex + nameRefIndex * 12] = item;
+	rainfallActiveList.Item[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12) + (yearIndex * 12) + monthIndex] = item;
 }
 #pragma endregion
 
@@ -79,12 +71,16 @@ void rainfallActiveListSetItem(int nameRefIndex, int monthIndex, bool item)
 void rainfallActiveListAdd(void)
 {
 	int i;
+	int j;
 
-	rainfallActiveListSetCapacity(rainfallActiveListGetCapacity() + 12);
+	rainfallActiveListSetCapacity(rainfallActiveListGetCapacity() + (END_YEAR - START_YEAR + 1) * 12);
 
-	for (i = 0; i < 12; i++)
+	for (i = 0; i < (END_YEAR - START_YEAR + 1); i++)
 	{
-		rainfallActiveListSetItem(rainfallCategoryListCount() - 1, i, false);
+		for (j = 0; j < 31; j++)
+		{
+			rainfallActiveListSetItem(rainfallCategoryListCount() - 1, i, j, false);
+		}
 	}
 }
 
@@ -93,23 +89,50 @@ void rainfallActiveListInsert(int nameRefIndex)
 {
 	int i;
 	int j;
+	int k;
+	int expectedCapacity = rainfallArrayListGetCapacity() + (END_YEAR - START_YEAR + 1) * 12;
 
-	bool* tempBool;
+	bool* tempBool = listInit(expectedCapacity, sizeof(bool));
 
-	rainfallActiveListSetCapacity(rainfallArrayListGetCapacity() + 12 * 31);
-
-	tempBool = rainfallActiveList.Item;
-
+	// Prepend any list in nameRefIndex
 	for (i = 0; i < rainfallCategoryListCount(); i++)
 	{
-		for (j = 0; j < 12; j++)
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
 		{
-			if (i != nameRefIndex)
-				tempBool[j + i * 12] = rainfallActiveListGetItem(i, j);
-			else
-				tempBool[j + i * 12] = false;
+			for (k = 0; k < 12; k++)
+			{
+				if (i < nameRefIndex)
+					tempBool[(i * (END_YEAR - START_YEAR + 1) * 12) + (j * 12) + k] = rainfallActiveListGetItem(i, j, k);
+				else
+					break;
+			}
 		}
 	}
+
+	// Append new index.
+	for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
+	{
+		for (k = 0; k < 12; k++)
+		{
+			tempBool[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12) + (j * 12) + k] = false;
+		}
+	}
+
+	// Append Rest of the index.
+	for (i = nameRefIndex; i < rainfallCategoryListCount(); i++)
+	{
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
+		{
+			for (k = 0; k < 12; k++)
+			{
+				tempBool[((i + 1) * (END_YEAR - START_YEAR + 1) * 12) + (j * 12) + k] = rainfallActiveListGetItem(i, j, k);
+			}
+		}
+	}
+
+	listDispose(rainfallActiveList.Item);
+	rainfallActiveList.Item = tempBool;
+	rainfallActiveList.Capacity = expectedCapacity;
 }
 
 // Removes all elements from the List<bool>.
@@ -117,52 +140,54 @@ void rainfallActiveListClear(void)
 {
 	int i;
 
-	rainfallActiveListSetCapacity(12);
+	rainfallActiveListSetCapacity((END_YEAR - START_YEAR + 1) * 12);
 
 	// Setup Default Array / Active List.
+	// By Default 2014 > All month active.
 	for (i = 0; i < 12; i++)
 	{
-		rainfallActiveListSetItem(0, i, true);
+		rainfallActiveListSetItem(0, 2014 - START_YEAR, i, true);
 	}
 }
 
 // Removes the element at the specified index of the List<bool>.
-void rainfallActiveListRemoveAt(int index)
+void rainfallActiveListRemoveAt(int nameRefIndex)
 {
 	int i;
-	int expectedCount = rainfallActiveListGetCapacity() - 12;
+	int j;
+	int k;
+	int expectedCount = rainfallActiveListGetCapacity() - (END_YEAR - START_YEAR + 1) * 12;
 	int expectedCapacity;
 	int appendIndex = 0;
 
 	bool* tempBool;
 
-	if (expectedCount == 12)
+	if (expectedCount == (END_YEAR - START_YEAR + 1) * 12)
 	{
 		rainfallArrayListClear();
 		return;
 	}
 	else
-		expectedCapacity = rainfallActiveListGetCapacity() - 12;
+		expectedCapacity = expectedCount;
 
-	tempBool = calloc(expectedCapacity, sizeof(bool));
-
-	if (tempBool == '\0')
-	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
+	tempBool = listInit(expectedCapacity, sizeof(bool));
 
 	for (i = 0; i < rainfallActiveListGetCapacity(); i++)
 	{
-		if (i < index * 12 || i >(index + 1) * 12)
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
 		{
-			tempBool[appendIndex] = rainfallActiveList.Item[i];
-			appendIndex++;
+			for (k = 0; k < 12; k++)
+			{
+				if (i != nameRefIndex)
+				{
+					tempBool[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12) + (j * 12) + k] = rainfallActiveListGetItem(i, j, k);
+				}
+			}
 		}
 	}
 
-	rainfallActiveListSetCapacity(expectedCapacity);
+	listDispose(rainfallActiveList.Item);
 	rainfallActiveList.Item = tempBool;
-
-	free(tempBool);
+	rainfallActiveList.Capacity = expectedCapacity;
 }
 #pragma endregion

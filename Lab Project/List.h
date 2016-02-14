@@ -15,13 +15,6 @@ struct List_string
 	string Item;
 };
 
-// Prototype List<int>
-struct List_int
-{
-	int* Item;
-	int Capacity;
-};
-
 // Prototype List<float>
 struct List_float
 {

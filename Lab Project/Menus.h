@@ -27,8 +27,20 @@ void showMenuD(void);
 // A function to show menu D1.
 void showMenuD1(void);
 
+// A function to show menu D1.
+void showMenuD1Year(int categoryIndex);
+
+// A function to show menu D1.
+void showMenuD1Month(int categoryIndex, int yearIndex);
+
 // A function to show menu D2.
 void showMenuD2(void);
+
+// A function to show menu D2.
+void showMenuD2Year(int categoryIndex);
+
+// A function to show menu D2.
+void showMenuD2Month(int categoryIndex, int yearIndex);
 
 // A function to show menu D3.
 void showMenuD3(void);

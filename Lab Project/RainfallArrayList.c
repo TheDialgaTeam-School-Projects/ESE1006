@@ -7,6 +7,7 @@
 #include "Modules.h"
 
 // Prototype of List<float> in c#
+// Expected Item[Year][Month][Day]
 
 // List<float> rainfallArrayList;
 struct List_float rainfallArrayList;
@@ -14,13 +15,8 @@ struct List_float rainfallArrayList;
 // A function to setup rainfallArrayList.
 void rainfallArrayListSetup(void)
 {
-	rainfallArrayList.Item = calloc(12 * 31, sizeof(float));
-	rainfallArrayList.Capacity = 12 * 31;
-
-	if (rainfallArrayList.Item == '\0')
-	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
+	rainfallArrayList.Item = listInit((END_YEAR - START_YEAR + 1) * 12 * 31, sizeof(float));
+	rainfallArrayList.Capacity = (END_YEAR - START_YEAR + 1) * 12 * 31;
 }
 
 #pragma region Properties
@@ -33,22 +29,17 @@ int rainfallArrayListGetCapacity(void)
 // Sets the total number of elements the internal data structure can hold without resizing.
 void rainfallArrayListSetCapacity(int newCapacity)
 {
-	rainfallArrayList.Item = realloc(rainfallArrayList.Item, newCapacity * sizeof(float));
+	rainfallArrayList.Item = listSet(rainfallArrayList.Item, newCapacity, sizeof(float));
 	rainfallArrayList.Capacity = newCapacity;
-
-	if (rainfallArrayList.Item == '\0')
-	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
 }
 
 // Gets the number of elements contained in the List<float>.
-int rainfallArrayListCount(int nameRefIndex, int monthIndex)
+int rainfallArrayListCount(int nameRefIndex, int yearIndex, int monthIndex)
 {
 	int i = 0;
 	int returnCount = 0;
 
-	while (rainfallArrayListGetItem(nameRefIndex, monthIndex, i) >= 0 && i < 31)
+	while (rainfallArrayListGetItem(nameRefIndex, yearIndex, monthIndex, i) >= 0 && i < 31)
 	{
 		returnCount++;
 		i++;
@@ -58,18 +49,18 @@ int rainfallArrayListCount(int nameRefIndex, int monthIndex)
 }
 
 // Gets the element at the specified index.
-float rainfallArrayListGetItem(int nameRefIndex, int monthIndex, int dayIndex)
+float rainfallArrayListGetItem(int nameRefIndex, int yearIndex, int monthIndex, int dayIndex)
 {
-	return rainfallArrayList.Item[dayIndex + (monthIndex + nameRefIndex * 12) * 31];
+	return rainfallArrayList.Item[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12 * 31) + (yearIndex * 12 * 31) + (monthIndex * 31) + dayIndex];
 }
 
 // Sets the element at the specified index.
-void rainfallArrayListSetItem(int nameRefIndex, int monthIndex, int dayIndex, float item)
+void rainfallArrayListSetItem(int nameRefIndex, int yearIndex, int monthIndex, int dayIndex, float item)
 {
-	while (rainfallArrayListGetCapacity() < dayIndex + (monthIndex + nameRefIndex * 12) * 31)
-		rainfallArrayListSetCapacity(rainfallArrayListGetCapacity() + 12 * 31);
+	while ((nameRefIndex * (END_YEAR - START_YEAR + 1) * 12 * 31) + (yearIndex * 12 * 31) + (monthIndex * 31) + dayIndex > rainfallArrayListGetCapacity())
+		rainfallArrayListSetCapacity(rainfallArrayListGetCapacity() + (END_YEAR - START_YEAR + 1) * 12 * 31);
 
-	rainfallArrayList.Item[dayIndex + (monthIndex + nameRefIndex * 12) * 31] = item;
+	rainfallArrayList.Item[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12 * 31) + (yearIndex * 12 * 31) + (monthIndex * 31) + dayIndex] = item;
 }
 #pragma endregion
 
@@ -79,14 +70,18 @@ void rainfallArrayListAdd(void)
 {
 	int i;
 	int j;
+	int k;
 
-	rainfallArrayListSetCapacity(rainfallArrayListGetCapacity() + 12 * 31);
+	rainfallArrayListSetCapacity(rainfallArrayListGetCapacity() + (END_YEAR - START_YEAR + 1) * 12 * 31);
 
-	for (i = 0; i < 12; i++)
+	for (i = 0; i < (END_YEAR - START_YEAR + 1); i++)
 	{
-		for (j = 0; j < 31; j++)
+		for (j = 0; j < 12; j++)
 		{
-			rainfallArrayListSetItem(rainfallCategoryListCount() - 1, i, j, -1.0);
+			for (k = 0; k < 31; k++)
+			{
+				rainfallArrayListSetItem(rainfallCategoryListCount() - 1, i, j, k, -1.0);
+			}
 		}
 	}
 }
@@ -97,28 +92,59 @@ void rainfallArrayListInsert(int nameRefIndex)
 	int i;
 	int j;
 	int k;
+	int l;
+	int expectedCapacity = rainfallArrayListGetCapacity() + (END_YEAR - START_YEAR + 1) * 12 * 31;
 
-	float* tempFloat;
+	float* tempFloat = listInit(expectedCapacity, sizeof(float));
 
-	rainfallArrayListSetCapacity(rainfallArrayListGetCapacity() + 12 * 31);
-
-	tempFloat = rainfallArrayList.Item;
-
+	// Prepend any list in nameRefIndex
 	for (i = 0; i < rainfallCategoryListCount(); i++)
 	{
-		for (j = 0; j < 12; j++)
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
 		{
-			for (k = 0; k < 31; k++)
+			for (k = 0; k < 12; k++)
 			{
-				if (i != nameRefIndex)
-					tempFloat[k + (j + i * 12) * 31] = rainfallArrayListGetItem(i, j, k);
-				else
-					tempFloat[k + (j + i * 12) * 31] = -1;
+				for (l = 0; l < 31; l++)
+				{
+					if (i < nameRefIndex)
+						tempFloat[(i * (END_YEAR - START_YEAR + 1) * 12 * 31) + (j * 12 * 31) + (k * 31) + l] = rainfallArrayListGetItem(i, j, k, l);
+					else
+						break;
+				}
 			}
 		}
 	}
 
+	// Append new index.
+	for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
+	{
+		for (k = 0; k < 12; k++)
+		{
+			for (l = 0; l < 31; l++)
+			{
+				tempFloat[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12 * 31) + (j * 12 * 31) + (k * 31) + l] = false;
+			}
+		}
+	}
+
+	// Append Rest of the index.
+	for (i = nameRefIndex; i < rainfallCategoryListCount(); i++)
+	{
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
+		{
+			for (k = 0; k < 12; k++)
+			{
+				for (l = 0; l < 31; l++)
+				{
+					tempFloat[((i + 1) * (END_YEAR - START_YEAR + 1) * 12 * 31) + (j * 12 * 31) + (k * 31) + l] = rainfallArrayListGetItem(i, j, k, l);
+				}
+			}
+		}
+	}
+
+	listDispose(rainfallArrayList.Item);
 	rainfallArrayList.Item = tempFloat;
+	rainfallArrayList.Capacity = expectedCapacity;
 }
 
 // Removes all elements from the List<float>.
@@ -126,6 +152,7 @@ void rainfallArrayListClear(void)
 {
 	int i;
 	int j;
+
 	float tempArray[12][31] =
 	{
 		{ 0.0, 0.0, 0.0, 0.0, 18.4, 31.2, 0.0, 0.0, 2.0, 0.0, 5.6, 18.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 },
@@ -142,55 +169,61 @@ void rainfallArrayListClear(void)
 		{ 26.4, 0.0, 0.0, 18.8, 0.0, 27.4, 35.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 17.6, 0.0, 15.6, 0.4, 0.4, 0.6, 0.2, 0.6, 37.6, 47.0, 10.6, 0.2, 2.0, 0.0, 0.0 }
 	};
 
-	rainfallArrayListSetCapacity(12 * 31);
+	rainfallArrayListSetCapacity((END_YEAR - START_YEAR + 1) * 12 * 31);
 
 	// Setup Default Array / Active List.
+	// Year 2014 > Every Month
 	for (i = 0; i < 12; i++)
 	{
 		for (j = 0; j < 31; j++)
 		{
-			rainfallArrayListSetItem(0, i, j, tempArray[i][j]);
+			rainfallArrayListSetItem(0, 2014 - START_YEAR, i, j, tempArray[i][j]);
 		}
 	}
 }
 
 // Removes the element at the specified index of the List<float>.
-void rainfallArrayListRemoveAt(int index)
+void rainfallArrayListRemoveAt(int nameRefIndex)
 {
 	int i;
-	int expectedCount = rainfallArrayListGetCapacity() - 12 * 31;
+	int j;
+	int k;
+	int l;
+	int expectedCount = rainfallArrayListGetCapacity() - (END_YEAR - START_YEAR + 1) * 12 * 31;
 	int expectedCapacity;
 	int appendIndex = 0;
 
 	float* tempFloat;
 
-	if (expectedCount == 12 * 31)
+	if (expectedCount == (END_YEAR - START_YEAR + 1) * 12 * 31)
 	{
 		rainfallArrayListClear();
 		return;
 	}
 	else
-		expectedCapacity = rainfallArrayListGetCapacity() - 12 * 31;
+		expectedCapacity = expectedCount;
 
-	tempFloat = calloc(expectedCapacity, sizeof(float));
+	tempFloat = listInit(expectedCapacity, sizeof(float));
 
-	if (tempFloat == '\0')
+	for (i = 0; i < rainfallActiveListGetCapacity(); i++)
 	{
-		puts("ERROR: Unable to allocate memory. Expect glitches or crashes at code execution.");
-	}
-
-	for (i = 0; i < rainfallArrayListGetCapacity(); i++)
-	{
-		if (i < index * 12 * 31 || i > (index + 1) * 12 * 31)
+		for (j = 0; j < (END_YEAR - START_YEAR + 1); j++)
 		{
-			tempFloat[appendIndex] = rainfallArrayList.Item[i];
-			appendIndex++;
+			for (k = 0; k < 12; k++)
+			{
+				for (l = 0; l < 31; l++)
+				{
+					if (i != nameRefIndex)
+					{
+						tempFloat[(nameRefIndex * (END_YEAR - START_YEAR + 1) * 12 * 31) + (j * 12 * 31) + (k * 31) + l] = rainfallArrayListGetItem(i, j, k, l);
+					}
+				}
+			}
 		}
 	}
 
-	rainfallArrayListSetCapacity(expectedCapacity);
+	listDispose(rainfallArrayList.Item);
 	rainfallArrayList.Item = tempFloat;
-
-	free(tempFloat);
+	rainfallArrayList.Capacity = expectedCapacity;
 }
 #pragma endregion

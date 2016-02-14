@@ -226,10 +226,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="RainfallYearList.c">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Scanf.c">
       <SubType>
       </SubType>
@@ -249,7 +245,6 @@
     <ClInclude Include="RainfallActiveList.h" />
     <ClInclude Include="RainfallArrayList.h" />
     <ClInclude Include="RainfallCategoryList.h" />
-    <ClInclude Include="RainfallYearList.h" />
     <ClInclude Include="Scanf.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>

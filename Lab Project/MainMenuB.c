@@ -12,25 +12,29 @@ void showMenuB(void)
 	int i;
 	int j;
 	int highestDay;
+	int expectedCount;
+
 	float highestRainfall = 0;
 
 	printHeader("B. Display the maximum rainfalls among all the months.");
 
 	for (i = 0; i < 12; i++)
 	{
-		if (rainfallActiveListGetItem(0, i) == true)
+		if (rainfallActiveListGetItem(0, 2014 - START_YEAR, i) == true)
 		{
+			expectedCount = rainfallArrayListCount(0, 2014 - START_YEAR, i);
+
 			// Algorithm to get the highest rainfall value and its day.
-			for (j = 0; j < rainfallArrayListCount(0, i); j++)
+			for (j = 0; j < expectedCount; j++)
 			{
-				if (highestRainfall < rainfallArrayListGetItem(0, i, j))
+				if (highestRainfall < rainfallArrayListGetItem(0, 2014 - START_YEAR, i, j))
 				{
 					highestDay = j + 1;
-					highestRainfall = rainfallArrayListGetItem(0, i, j);
+					highestRainfall = rainfallArrayListGetItem(0, 2014 - START_YEAR, i, j);
 				}
 			}
 
-			printf("The maximum rainfall for %s is %.1fmm on %d %s.\n", getMonthName(i + 1), highestRainfall, highestDay, getMonthName(i + 1));
+			printf("The maximum rainfall for %s is %.1f mm on %d %s.\n", getMonthName(i + 1), highestRainfall, highestDay, getMonthName(i + 1));
 
 			highestRainfall = 0;
 			highestDay = 0;

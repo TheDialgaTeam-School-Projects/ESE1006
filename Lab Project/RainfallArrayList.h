@@ -23,13 +23,13 @@ int rainfallArrayListGetCapacity(void);
 void rainfallArrayListSetCapacity(int newCapacity);
 
 // Gets the number of elements contained in the List<float>.
-int rainfallArrayListCount(int nameRefIndex, int monthIndex);
+int rainfallArrayListCount(int nameRefIndex, int yearIndex, int monthIndex);
 
 // Gets the element at the specified index.
-float rainfallArrayListGetItem(int nameRefIndex, int monthIndex, int dayIndex);
+float rainfallArrayListGetItem(int nameRefIndex, int yearIndex, int monthIndex, int dayIndex);
 
 // Sets the element at the specified index.
-void rainfallArrayListSetItem(int nameRefIndex, int monthIndex, int dayIndex, float item);
+void rainfallArrayListSetItem(int nameRefIndex, int yearIndex, int monthIndex, int dayIndex, float item);
 #pragma endregion
 
 #pragma region Methods
@@ -43,6 +43,6 @@ void rainfallArrayListInsert(int nameRefIndex);
 void rainfallArrayListClear(void);
 
 // Removes the element at the specified index of the List<float>.
-void rainfallArrayListRemoveAt(int index);
+void rainfallArrayListRemoveAt(int nameRefIndex);
 #pragma endregion
 #endif

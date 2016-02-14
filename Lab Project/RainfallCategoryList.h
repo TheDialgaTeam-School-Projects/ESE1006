@@ -35,12 +35,12 @@ void rainfallCategoryListSetItem(int index, string item);
 
 #pragma region Methods
 // Adds an object to the end of the List<string>.
-void rainfallNameListAdd(string item);
+void rainfallCategoryListAdd(string item);
 
 // Removes all elements from the List<string>.
-void rainfallNameListClear(void);
+void rainfallCategoryListClear(void);
 
 // Removes the element at the specified index of the List<string>.
-void rainfallNameListRemoveAt(int index);
+void rainfallCategoryListRemoveAt(int index);
 #pragma endregion
 #endif
