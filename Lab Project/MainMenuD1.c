@@ -23,6 +23,7 @@ void displayMenuD1(int* menuCount, int* categoryRefIndex)
 		expectedCategory = rainfallCategoryListGetItem(i);
 		printf("%d. %s\n", *menuCount, expectedCategory);
 		stringDispose(expectedCategory);
+		categoryRefIndex[*menuCount - 1] = i;
 		*menuCount++;
 	}
 
@@ -33,27 +34,26 @@ void displayMenuD1(int* menuCount, int* categoryRefIndex)
 // A function to show menu D1.
 void showMenuD1(void)
 {
-	struct categoryIndexMenu nameRefIndexMenuD1;
-
-	int i;
+	int menuCount = 1;
+	int categoryRefIndex[rainfallCategoryListCount()];
 	int menuOptions;
 
-	displayMenuD1(&nameRefIndexMenuD1);
+	displayMenuD1(&menuCount, categoryRefIndex);
 
 	do
 	{
 		menuOptions = scanInt();
 
-		if (menuOptions < 1 || menuOptions > nameRefIndexMenuD1.numberOfMenu)
+		if (menuOptions < 1 || menuOptions > menuCount)
 			puts("\tInvalid option. Please try again!");
-		else if (menuOptions < nameRefIndexMenuD1.numberOfMenu)
+		else if (menuOptions < menuCount)
 		{
 			showMenuD1Year(menuOptions - 1);
-			displayMenuD1(&nameRefIndexMenuD1);
+			displayMenuD1(&menuCount, categoryRefIndex);
 		}
 		else
 			break;
-	} while (menuOptions != nameRefIndexMenuD1.numberOfMenu);
+	} while (menuOptions != menuCount);
 }
 
 // A function to show menu D1.
