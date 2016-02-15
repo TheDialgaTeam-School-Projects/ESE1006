@@ -96,15 +96,6 @@
     <ClCompile Include="List.c">
       <Filter>Source Files\List&lt;T&gt;</Filter>
     </ClCompile>
-    <ClCompile Include="RainfallActiveList.c">
-      <Filter>Source Files\List&lt;T&gt;</Filter>
-    </ClCompile>
-    <ClCompile Include="RainfallArrayList.c">
-      <Filter>Source Files\List&lt;T&gt;</Filter>
-    </ClCompile>
-    <ClCompile Include="RainfallCategoryList.c">
-      <Filter>Source Files\List&lt;T&gt;</Filter>
-    </ClCompile>
     <ClCompile Include="DateTime.c">
       <Filter>Source Files\Functions</Filter>
     </ClCompile>
@@ -125,20 +116,11 @@
     <ClInclude Include="List.h">
       <Filter>Header Files\List&lt;T&gt;</Filter>
     </ClInclude>
-    <ClInclude Include="RainfallArrayList.h">
-      <Filter>Header Files\List&lt;T&gt;</Filter>
-    </ClInclude>
-    <ClInclude Include="RainfallActiveList.h">
-      <Filter>Header Files\List&lt;T&gt;</Filter>
-    </ClInclude>
     <ClInclude Include="Menus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Header Files\Functions</Filter>
-    </ClInclude>
-    <ClInclude Include="RainfallCategoryList.h">
-      <Filter>Header Files\List&lt;T&gt;</Filter>
     </ClInclude>
     <ClInclude Include="DateTime.h">
       <Filter>Header Files\Functions</Filter>

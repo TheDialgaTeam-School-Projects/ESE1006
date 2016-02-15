@@ -9,32 +9,76 @@
 #ifndef _INC_List
 #define _INC_List
 
-// Prototype List<string>
-struct List_string
-{
-	string Item;
-};
+// List<categoryList>
+struct categoryList rainfallCategoryList;
 
-// Prototype List<float>
-struct List_float
-{
-	float* Item;
-	int Capacity;
-};
+// A function to setup rainfallCategoryList.
+void rainfallCategoryListSetup(void);
 
-// Prototype List<bool>
-struct List_bool
-{
-	bool* Item;
-	int Capacity;
-};
-
-// Initializes a new instance of the List<T> class that is empty and has the default initial capacity.
-void* listInit(int capacity, int typeSize);
+#pragma region rainfallCategoryList
+#pragma region Properties
+// Gets the total number of elements the internal data structure can hold without resizing.
+int rainfallCategoryListGetCapacity(void);
 
 // Sets the total number of elements the internal data structure can hold without resizing.
-void* listSet(void* list, int capacity, int typeSize);
+void rainfallCategoryListSetCapacity(int newCapacity);
 
-// Dispose the list.
-void listDispose(void* list);
+// Gets the number of elements contained in the List<rainfallCategory>.
+int rainfallCategoryListCount(void);
+
+// Gets the element at the specified index.
+string rainfallCategoryListGetItem(int categoryIndex);
+
+// Sets the element at the specified index.
+void rainfallCategoryListSetItem(int categoryIndex, string item);
+#pragma endregion
+
+#pragma region Methods
+// Adds an object to the end of the List<rainfallCategory>.
+void rainfallCategoryListAdd(string item);
+
+// Inserts an element into the List<rainfallCategory> at the specified index.
+void rainfallCategoryListInsert(int categoryIndex, string item);
+
+// Removes all elements from the List<rainfallCategory>.
+void rainfallCategoryListClear(void);
+
+// Removes the element at the specified index of the List<rainfallCategory>.
+void rainfallCategoryListRemoveAt(int categoryIndex);
+#pragma endregion
+#pragma endregion
+
+#pragma region rainfallYearList
+#pragma region Properties
+// Gets the total number of elements the internal data structure can hold without resizing.
+int rainfallYearListGetCapacity(void);
+
+// Gets the number of elements contained in the List<rainfallCategory.item>.
+int rainfallYearListCount(int categoryIndex);
+#pragma endregion
+#pragma endregion
+
+#pragma region rainfallMonthList
+#pragma region Properties
+// Gets the total number of elements the internal data structure can hold without resizing.
+int rainfallMonthListGetCapacity(void);
+
+// Gets the number of elements contained in the List<rainfallCategory.item>
+int rainfallMonthListCount(int categoryIndex, int yearIndex);
+#pragma endregion
+#pragma endregion
+
+#pragma region rainfallDayList
+#pragma region Properties
+// Gets the total number of elements the internal data structure can hold without resizing.
+int rainfallDayListGetCapacity(void);
+
+// Gets the number of elements contained in the List<rainfallCategory.item>
+int rainfallDayListCount(int categoryIndex, int yearIndex, int monthIndex);
+
+// Gets the element at the specified index.
+float rainfallDayListGetItem(int categoryIndex, int yearIndex, int monthIndex, int dayIndex);
+#pragma endregion
+#pragma endregion
+
 #endif

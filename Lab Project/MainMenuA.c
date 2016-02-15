@@ -7,57 +7,67 @@
 #include "Modules.h"
 
 // A function to show Menu A.
-void showMenuA(void)
+void displayMenuA(int* menuCount, int categoryIndex, int yearIndex, int* monthRefIndex)
 {
-	int i;
-	int menuOptions;
-	int expectedRainfallArrayCount;
-	int selectedMonth;
-	int monthRefIndex[12];
-	int numberOfMenu = 1;
-
-	float total = 0;
-	float average;
+	int month;
 
 	printHeader("A. Display the average rainfall of a selected month.");
-	printf("Please select the month from options 1 to %d that you want to display.\n", rainfallActiveListCount(0, 2014 - START_YEAR));
+	printf("Please select the month from options 1 to %d that you want to display.\n", rainfallMonthListCount(categoryIndex, yearIndex));
 
-	for (i = 0; i < 12; i++)
+	for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 	{
-		if (rainfallActiveListGetItem(0, 2014 - START_YEAR, i) == true)
+		if (rainfallDayListCount(categoryIndex, yearIndex, month) > 0)
 		{
-			printf("%d. %s\n", numberOfMenu, getMonthName(i + 1));
-			monthRefIndex[numberOfMenu - 1] = i;
-			numberOfMenu++;
+			printf("%d. %s\n", *menuCount, getMonthName(month + 1));
+			monthRefIndex[*menuCount - 1] = month;
+			*menuCount++;
 		}
 	}
 
-	printf("%d. Go back to main menu.\n", numberOfMenu);
+	printf("%d. Go back to main menu.\n", *menuCount);
 	printHash();
+}
+
+// A function to show Menu A.
+void showMenuA(void)
+{
+	int menuCount = 1;
+	int categoryIndex = 0;
+	int yearIndex = 2014 - START_YEAR;
+	int monthRefIndex[12];
+
+	int menuOptions;
+	int selectedMonth;
+	int expectedRainfallDayListCount;
+	int day;
+
+	float total;
+	float average;
+
+	displayMenuA(&menuCount, categoryIndex, yearIndex, monthRefIndex);
 
 	do
 	{
 		menuOptions = scanInt();
 
-		if (menuOptions < 1 || menuOptions > numberOfMenu)
+		if (menuOptions < 1 || menuOptions > menuCount)
 			puts("\tInvalid option. Please try again!");
-		else if (menuOptions < numberOfMenu)
+		else if (menuOptions < menuCount)
 		{
 			selectedMonth = monthRefIndex[menuOptions - 1];
-			expectedRainfallArrayCount = rainfallArrayListCount(0, 2014 - START_YEAR, selectedMonth);
-
-			for (i = 0; i < expectedRainfallArrayCount; i++)
-			{
-				total += rainfallArrayListGetItem(0, 2014 - START_YEAR, selectedMonth, i);
-			}
-
-			average = total / expectedRainfallArrayCount;
-			printf("The average rainfall for %s is %.1f mm.\n", getMonthName(selectedMonth + 1), average);
+			expectedRainfallDayListCount = rainfallDayListCount(categoryIndex, yearIndex, selectedMonth);
 
 			total = 0;
-			average = 0;
+
+			for (day = 0; day < expectedRainfallDayListCount; day++)
+			{
+				total += rainfallDayListGetItem(categoryIndex, yearIndex, selectedMonth, day);
+			}
+
+			average = total / expectedRainfallDayListCount;
+			printf("The average rainfall for %s is %.1f mm.\n", getMonthName(selectedMonth + 1), average);
 		}
 		else
 			break;
-	} while (menuOptions != numberOfMenu);
+	} while (menuOptions != menuCount);
 }

@@ -9,24 +9,13 @@
 // Main Entry Point.
 void main(void)
 {
-	// Setup List<string> RainfallNameList
+	// Setup List<categoryList> rainfallCategoryList
 	rainfallCategoryListSetup();
 
-	// Setup List<float> RainfallArrayList
-	rainfallArrayListSetup();
-
-	// Setup List<bool> RainfallActiveList
-	rainfallActiveListSetup();
-
-	// Setup Default values.
-	rainfallCategoryListClear();
-	rainfallArrayListClear();
-	rainfallActiveListClear();
-
-	// Change the console colour to a more friendly readable colour.
+	// Change the console colour.
 	system("color 17");
 
-	// Change the console title for some fancyness :P.
+	// Change the console title.
 	system("title CPPS Project - Rainfall Viewer 1");
 
 	showMainMenu();

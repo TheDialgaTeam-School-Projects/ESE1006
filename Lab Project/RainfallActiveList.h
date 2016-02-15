@@ -25,7 +25,10 @@ int rainfallActiveListGetCapacity(void);
 void rainfallActiveListSetCapacity(int newCapacity);
 
 // Gets the number of elements contained in the List<bool>.
-int rainfallActiveListCount(int nameRefIndex, int yearIndex);
+int rainfallActiveListDayCount(int nameRefIndex, int yearIndex);
+
+// Gets the number of elements contained in the List<bool>.
+int rainfallActiveListYearCount(int nameRefIndex);
 
 // Gets the element at the specified index.
 bool rainfallActiveListGetItem(int nameRefIndex, int yearIndex, int monthIndex);

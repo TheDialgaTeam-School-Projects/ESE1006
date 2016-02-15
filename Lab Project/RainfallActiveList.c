@@ -34,7 +34,7 @@ void rainfallActiveListSetCapacity(int newCapacity)
 }
 
 // Gets the number of elements contained in the List<bool>.
-int rainfallActiveListCount(int nameRefIndex, int yearIndex)
+int rainfallActiveListDayCount(int nameRefIndex, int yearIndex)
 {
 	int i;
 	int returnCount = 0;
@@ -44,6 +44,28 @@ int rainfallActiveListCount(int nameRefIndex, int yearIndex)
 		if (rainfallActiveListGetItem(nameRefIndex, yearIndex, i) == true)
 		{
 			returnCount++;
+		}
+	}
+
+	return returnCount;
+}
+
+// Gets the number of elements contained in the List<bool>.
+int rainfallActiveListYearCount(int nameRefIndex)
+{
+	int i;
+	int j;
+	int returnCount = 0;
+
+	for (i = 0; i < END_YEAR - START_YEAR + 1; i++)
+	{
+		for (j = 0; j < 12; j++)
+		{
+			if (rainfallActiveListGetItem(nameRefIndex, i, j) == true)
+			{
+				returnCount += 1;
+				break;
+			}
 		}
 	}
 

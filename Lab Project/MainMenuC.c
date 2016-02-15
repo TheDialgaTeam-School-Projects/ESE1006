@@ -9,50 +9,52 @@ Class: PE27
 // A function to show menu C.
 void showMenuC(void)
 {
-	int i;
-	int j;
-	int lowestMonth = 0;
-	int expectedCount;
+	int categoryIndex = 0;
+	int yearIndex = 2014 - START_YEAR;
 
-	float lowestRainfall = INT_MAX;
-	float averageRainfall[12];
+	int month;
+	int day;
+	int expectedRainfallDayListCount;
+	int lowestMonth = 0;
+
 	float total;
+	float averageRainfall[12];
+	float lowestRainfall = INT_MAX;
 
 	printHeader("C. Display the month with the lowest average rainfall and the value for all months.");
 
-	for (i = 0; i < 12; i++)
+	for (month = 0; month < rainfallMonthListCapacity(); month++)
 	{
 		total = 0;
+		expectedRainfallDayListCount = rainfallDayListCount(categoryIndex, yearIndex, month);
 
-		if (rainfallActiveListGetItem(0, 2014 - START_YEAR, i) == true)
+		if (expectedRainfallDayListCount > 0)
 		{
-			expectedCount = rainfallArrayListCount(0, 2014 - START_YEAR, i);
-
-			for (j = 0; j < expectedCount; j++)
+			for (day = 0; day < expectedRainfallDayListCount; day++)
 			{
-				total += rainfallArrayListGetItem(0, 2014 - START_YEAR, i, j);
+				total += rainfallDayListGetItem(categoryIndex, yearIndex, month, day);
 			}
 
-			averageRainfall[i] = total / rainfallArrayListCount(0, 2014 - START_YEAR, i);
+			averageRainfall[month] = total / expectedRainfallDayListCount;
 
-			if (lowestRainfall > averageRainfall[i])
+			if (lowestRainfall > averageRainfall[month])
 			{
-				lowestRainfall = averageRainfall[i];
-				lowestMonth = i + 1;
+				lowestRainfall = averageRainfall[month];
+				lowestMonth = month + 1;
 			}
 		}
 		else
 		{
-			averageRainfall[i] = -1;
+			averageRainfall[month] = -1;
 		}
 	}
 
 	printf("Average rainfall for the year:\n");
-	for (i = 0; i < 12; i++)
+	for (month = 0; month < rainfallMonthListCapacity(); month++)
 	{
-		if (averageRainfall[i] != -1)
+		if (averageRainfall[month] != -1)
 		{
-			printf("%10s %.1f mm\n", getMonthName(i + 1), averageRainfall[i]);
+			printf("%10s %.1f mm\n", getMonthName(month + 1), averageRainfall[month]);
 		}
 	}
 

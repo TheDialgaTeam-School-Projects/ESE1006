@@ -10,7 +10,7 @@
 #define _INC_RainfallCategoryList
 
 // List<string> rainfallCategoryList;
-struct List_string rainfallCategoryList;
+// struct List_string rainfallCategoryList;
 
 // A function to setup rainfallCategoryList.
 void rainfallCategoryListSetup(void);

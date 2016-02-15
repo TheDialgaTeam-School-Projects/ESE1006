@@ -214,18 +214,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="RainfallActiveList.c">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="RainfallArrayList.c">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="RainfallCategoryList.c">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Scanf.c">
       <SubType>
       </SubType>
@@ -242,9 +230,6 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Modules.h" />
-    <ClInclude Include="RainfallActiveList.h" />
-    <ClInclude Include="RainfallArrayList.h" />
-    <ClInclude Include="RainfallCategoryList.h" />
     <ClInclude Include="Scanf.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>

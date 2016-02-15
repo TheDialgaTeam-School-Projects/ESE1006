@@ -25,23 +25,15 @@ void validateSession(void)
 		{
 			puts("Session is not validated, please enter the password:");
 			currentPassword = scanString(2);
+			sessionValidated = true;
 
-			for (i = 0; i < CMD_MAX + 1; i++)
+			for (i = 0; i < strlen(SYSTEM_PASSWORD); i++)
 			{
-				if (currentPassword[i] == '\0')
-				{
-					sessionValidated = 1;
-					break;
-				}
-				else if (currentPassword[i] != SYSTEM_PASSWORD[i])
+				if (currentPassword[i] != SYSTEM_PASSWORD[i] || strlen(currentPassword) != strlen(SYSTEM_PASSWORD))
 				{
 					puts("\nWrong Password. Please try again.\n");
-					sessionValidated = 0;
+					sessionValidated = false;
 					break;
-				}
-				else
-				{
-					sessionValidated = 1;
 				}
 			}
 

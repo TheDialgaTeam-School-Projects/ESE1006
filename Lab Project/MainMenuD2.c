@@ -207,7 +207,7 @@ void showMenuD2Month(int categoryIndex, int yearIndex)
 //			numberOfMenu = 1;
 //
 //			printHeader("D2. Rainfall database manager - Manage Rainfall data.");
-//			printf("Please select the month from options 1 to %d that you want to change.\n", rainfallActiveListCount(nameRefIndex));
+//			printf("Please select the month from options 1 to %d that you want to change.\n", rainfallActiveListDayCount(nameRefIndex));
 //
 //			for (i = 0; i < 12; i++)
 //			{
