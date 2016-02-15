@@ -14,6 +14,8 @@ void displayMenuA(int* menuCount, int categoryIndex, int yearIndex, int* monthRe
 	printHeader("A. Display the average rainfall of a selected month.");
 	printf("Please select the month from options 1 to %d that you want to display.\n", rainfallMonthListCount(categoryIndex, yearIndex));
 
+	*menuCount = 1;
+
 	for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 	{
 		if (rainfallDayListCount(categoryIndex, yearIndex, month) > 0)
