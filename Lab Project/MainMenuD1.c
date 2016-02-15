@@ -7,7 +7,7 @@
 #include "Modules.h"
 
 // A function to show menu D1.
-void displayMenuD1(struct categoryIndexMenu* nameRefIndexMenuD1)
+void displayMenuD1(int* menuCount, int* categoryRefIndex)
 {
 	int i;
 	int expectedRainfallCategoryListCount = rainfallCategoryListCount();
@@ -16,17 +16,17 @@ void displayMenuD1(struct categoryIndexMenu* nameRefIndexMenuD1)
 	printHeader("D1. Rainfall database manager - View Rainfall database.");
 	printf("Please select the category list from options 1 to %d that you want to display.\n", expectedRainfallCategoryListCount);
 
-	nameRefIndexMenuD1->numberOfMenu = 1;
+	*menuCount = 1;
 
 	for (i = 0; i < expectedRainfallCategoryListCount; i++)
 	{
 		expectedCategory = rainfallCategoryListGetItem(i);
-		printf("%d. %s\n", nameRefIndexMenuD1->numberOfMenu, expectedCategory);
+		printf("%d. %s\n", *menuCount, expectedCategory);
 		stringDispose(expectedCategory);
-		nameRefIndexMenuD1->numberOfMenu++;
+		*menuCount++;
 	}
 
-	printf("%d. Go back to Rainfall database manager menu.\n", nameRefIndexMenuD1->numberOfMenu);
+	printf("%d. Go back to Rainfall database manager menu.\n", *menuCount);
 	printHash();
 }
 
