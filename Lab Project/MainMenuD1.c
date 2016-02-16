@@ -34,8 +34,7 @@ void displayMenuD1(int* menuCount)
 void displayMenuD1Year(int* menuCount, int categoryIndex, int* yearRefIndex)
 {
 	int year;
-	int j;
-	int expectedRainfallYearListCount = rainfallYearListYearCount(categoryIndex);
+	int expectedRainfallYearListCount = rainfallYearListCount(categoryIndex);
 
 	printHeader("D1. Rainfall database manager - View Rainfall database.");
 	printf("Please select the year from options 1 to %d that you want to display.\n", expectedRainfallYearListCount);
@@ -49,7 +48,31 @@ void displayMenuD1Year(int* menuCount, int categoryIndex, int* yearRefIndex)
 			printf("%d. %d\n", *menuCount, year + START_YEAR);
 			yearRefIndex[*menuCount - 1] = year;
 			*menuCount++;
-			break;
+		}
+	}
+
+	printf("%d. Go back to category list selection.\n", *menuCount);
+	printHash();
+}
+
+// A function to show menu D1.
+void displayMenuD1Month(int* menuCount, int categoryIndex, int yearIndex, int* MonthRefIndex)
+{
+	int month;
+	int expectedRainfallMonthListCount = rainfallMonthListCount(categoryIndex, yearIndex);
+
+	printHeader("D1. Rainfall database manager - View Rainfall database.");
+	printf("Please select the month from options 1 to %d that you want to display.\n", expectedRainfallMonthListCount);
+
+	*menuCount = 1;
+
+	for (month = 0; month < rainfallMonthListCapacity(); month++)
+	{
+		if (rainfallDayListCount(categoryIndex, yearIndex, month) > 0)
+		{
+			printf("%d. %d\n", *menuCount, getMonthName(month + 1));
+			monthRefIndex[*menuCount - 1] = month;
+			*menuCount++;
 		}
 	}
 
@@ -60,7 +83,7 @@ void displayMenuD1Year(int* menuCount, int categoryIndex, int* yearRefIndex)
 // A function to show menu D1.
 void showMenuD1(void)
 {
-	int menuCount = 1;
+	int menuCount;
 	int menuOptions;
 
 	displayMenuD1(&menuCount);
@@ -82,46 +105,36 @@ void showMenuD1(void)
 }
 
 // A function to show menu D1.
-void showMenuD1Year(int* categoryCount, int categoryIndex, int* yearRefIndex)
+void showMenuD1Year(int categoryIndex)
 {
-	int i;
-	int j;
-	int menuOptions;
-	int expectedCount = 0;
-	int numberOfMenu = 0;
+	int menuCount;
 	int yearRefIndex[END_YEAR - START_YEAR + 1];
+	int menuOptions;
 
+	displayMenuD1Year(&menuCount, categoryIndex, yearRefIndex);
 
 	do
 	{
 		menuOptions = scanInt();
 
-		if (menuOptions > numberOfMenu || menuOptions < 1)
-		{
+		if (menuOptions < 1 || menuOptions > menuCount)
 			puts("\tInvalid option. Please try again!");
-		}
-		else if (menuOptions < numberOfMenu)
+		else if (menuOptions < menuCount)
 		{
 			showMenuD1Month(categoryIndex, yearRefIndex[menuOptions - 1]);
-			numberOfMenu = 0;
-			goto MainMenu1;
+			displayMenuD1Year(&menuCount, categoryIndex, yearRefIndex);
 		}
 		else
-		{
 			break;
-		}
-	} while (menuOptions != numberOfMenu);
+	} while (menuOptions != menuCount);
 }
 
 // A function to show menu D1.
 void showMenuD1Month(int categoryIndex, int yearIndex)
 {
-	int i;
-	int menuOptions;
-	int selectedMonth;
-	int expectedCount = rainfallActiveListDayCount(categoryIndex, yearIndex);
-	int numberOfMenu = 0;
+	int menuCount;
 	int monthRefIndex[12];
+	int menuOptions;
 
 	printHeader("D1. Rainfall database manager - View Rainfall database.");
 	printf("Please select the month from options 1 to %d that you want to display.\n", expectedCount);
