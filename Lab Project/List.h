@@ -2,12 +2,36 @@
 	Name: Yong Jian Ming
 	Admin No: 1501545F
 	Class: PE27
+
 */
 
 #pragma once
 
 #ifndef _INC_List
 #define _INC_List
+
+// Command Prompt Max String Buffer.
+#define CMD_MAX 8191
+
+// Prototype List<categoryList>.
+struct categoryList
+{
+	// Prototype List<rainfallCategory>.
+	struct rainfallCategory* rainfallCategoryList;
+
+	// Size of capacity.
+	int capacity;
+};
+
+// Prototype List<rainfallCategory>
+struct rainfallCategory
+{
+	// Name of the category.
+	char name[CMD_MAX + 1];
+
+	// Rainfall value.
+	float item[END_YEAR - START_YEAR + 1][12][31];
+};
 
 // List<categoryList>
 struct categoryList rainfallCategoryList;
