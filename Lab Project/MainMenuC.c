@@ -23,7 +23,7 @@ void showMenuC(void)
 
 	printHeader("C. Display the month with the lowest average rainfall and the value for all months.");
 
-	for (month = 0; month < rainfallMonthListCapacity(); month++)
+	for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 	{
 		total = 0;
 		expectedRainfallDayListCount = rainfallDayListCount(categoryIndex, yearIndex, month);
@@ -50,7 +50,7 @@ void showMenuC(void)
 	}
 
 	printf("Average rainfall for the year:\n");
-	for (month = 0; month < rainfallMonthListCapacity(); month++)
+	for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 	{
 		if (averageRainfall[month] != -1)
 		{

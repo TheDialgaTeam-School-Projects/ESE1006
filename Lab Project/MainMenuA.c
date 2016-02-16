@@ -22,7 +22,7 @@ void displayMenuA(int* menuCount, int categoryIndex, int yearIndex, int* monthRe
 		{
 			printf("%d. %s\n", *menuCount, getMonthName(month + 1));
 			monthRefIndex[*menuCount - 1] = month;
-			*menuCount++;
+			*menuCount = *menuCount + 1;
 		}
 	}
 

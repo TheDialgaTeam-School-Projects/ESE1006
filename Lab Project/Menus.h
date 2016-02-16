@@ -62,4 +62,7 @@ void showMenuD4(void);
 
 // A function to show menu D4.2.
 void showMenuD4_2(void);
+
+// A function to show menu D4.3.
+void showMenuD4_3(void);
 #endif

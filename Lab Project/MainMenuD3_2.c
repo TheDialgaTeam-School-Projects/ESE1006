@@ -9,35 +9,32 @@
 // A function to show menu D3.2.
 void showMenuD3_2(void)
 {
+	int expectedRainfallCategoryListCount = rainfallCategoryListCount();
+	int menuCount;
 	int i;
-	int numberOfMenu;
 	int menuOptions;
 
 	do
 	{
 		printHeader("D3.2. Rainfall database manager - Rename a Rainfall category.");
-		printf("Please select the Category List from options 1 to %d that you want to rename.\n", rainfallCategoryListCount());
+		printf("Please select the Category List from options 1 to %d that you want to rename.\n", expectedRainfallCategoryListCount);
 
-		numberOfMenu = 1;
+		menuCount = 1;
 
-		for (i = 0; i < rainfallCategoryListCount(); i++)
+		for (i = 0; i < expectedRainfallCategoryListCount; i++)
 		{
-			printf("%d. %s\n", numberOfMenu, rainfallCategoryListGetItem(i));
-			numberOfMenu++;
+			printf("%d. %s\n", menuCount, rainfallCategoryListGetItem(i));
+			menuCount++;
 		}
 
-		printf("%d. Go back to Rainfall database manager menu.\n", numberOfMenu);
+		printf("%d. Go back to Rainfall database manager menu.\n", menuCount);
 		printHash();
-
-		numberOfMenu += 1;
 
 		menuOptions = scanInt();
 
-		if (menuOptions > numberOfMenu || menuOptions < 1)
-		{
+		if (menuOptions < 1 || menuOptions > menuCount)
 			puts("\tInvalid option. Please try again!");
-		}
-		else if (menuOptions < numberOfMenu - 1)
+		else if (menuOptions < menuCount)
 		{
 			puts("Please enter the name of the category:");
 			
@@ -46,10 +43,8 @@ void showMenuD3_2(void)
 			puts("Successfully renamed the selected category!");
 		}
 		else
-		{
 			break;
-		}
 
 		pause();
-	} while (menuOptions != numberOfMenu);
+	} while (menuOptions != menuCount);
 }

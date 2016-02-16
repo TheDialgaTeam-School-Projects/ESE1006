@@ -214,6 +214,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MainMenuD4_3.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Scanf.c">
       <SubType>
       </SubType>

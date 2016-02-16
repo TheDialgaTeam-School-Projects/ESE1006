@@ -102,6 +102,9 @@ int rainfallDayListCount(int categoryIndex, int yearIndex, int monthIndex);
 
 // Gets the element at the specified index.
 float rainfallDayListGetItem(int categoryIndex, int yearIndex, int monthIndex, int dayIndex);
+
+// Sets the element at the specified index.
+void rainfallDayListSetItem(int categoryIndex, int yearIndex, int monthIndex, int dayIndex, float item);
 #pragma endregion
 #pragma endregion
 

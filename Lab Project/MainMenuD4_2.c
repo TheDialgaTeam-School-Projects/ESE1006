@@ -10,11 +10,13 @@
 void showMenuD4_2(void)
 {
 	FILE* file;
-	char filename[CMD_MAX];
+	char filename[CMD_MAX + 1];
 
 	int i;
-	int j;
-	int k;
+	int year;
+	int month;
+	int day;
+	float expectedRainfall;
 
 	printHeader("D4.2. Rainfall database manager - Export database.");
 
@@ -26,26 +28,29 @@ void showMenuD4_2(void)
 	for (i = 0; i < rainfallCategoryListCount(); i++)
 	{
 		// Get filename.
-		strcpy(filename, "Database\\");
-		strcat(filename, rainfallCategoryListGetItem(i));
-		strcat(filename, ".csv");
+		stringCopy(filename, "Database\\", rainfallCategoryListGetItem(i), ".csv", NULL);
 
 		// Create a file. Give writing permission.
 		file = fopen(filename, "w+");
 		
-		fputs("Category,Month,Day,Daily Rainfall Total (mm)\n", file);
+		fputs("Category,Year,Month,Day,Daily Rainfall Total (mm)\n", file);
 		fflush(file);
 
 		printf("> Exporting database (%d / %d) %.2f%%\n", i + 1, rainfallCategoryListCount(), (i + 1) / rainfallCategoryListCount() * 100.0);
 
-		for (j = 0; j < 12; j++)
+		for (year = 0; year < rainfallYearListGetCapacity(); year++)
 		{
-			for (k = 0; k < 31; k++)
+			for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 			{
-				if (rainfallArrayListGetItem(i,0, j, k) != -1)
+				for (day = 0; day < rainfallDayListGetCapacity(); day++)
 				{
-					fprintf(file, "%s,%d,%d,%.1f\n", rainfallCategoryListGetItem(i), j + 1, k + 1, rainfallArrayListGetItem(i,0, j, k));
-					fflush(file);
+					expectedRainfall = rainfallDayListGetItem(i, year, month, day);
+
+					if (expectedRainfall != -1)
+					{
+						fprintf(file, "%s,%d,%d,%d,%.1f\n", rainfallCategoryListGetItem(i), START_YEAR + year, month + 1, day + 1, expectedRainfall);
+						fflush(file);
+					}
 				}
 			}
 		}

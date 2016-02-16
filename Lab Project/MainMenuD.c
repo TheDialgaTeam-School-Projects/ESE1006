@@ -14,6 +14,7 @@ void validateSession(void)
 {
 	int i;
 	int wrongAttempt;
+	int expectedLength = strlen(SYSTEM_PASSWORD);
 	
 	string currentPassword;
 
@@ -27,7 +28,7 @@ void validateSession(void)
 			currentPassword = scanString(2);
 			sessionValidated = true;
 
-			for (i = 0; i < strlen(SYSTEM_PASSWORD); i++)
+			for (i = 0; i < expectedLength; i++)
 			{
 				if (currentPassword[i] != SYSTEM_PASSWORD[i] || strlen(currentPassword) != strlen(SYSTEM_PASSWORD))
 				{

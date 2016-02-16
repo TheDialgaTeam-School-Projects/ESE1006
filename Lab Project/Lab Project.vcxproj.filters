@@ -99,6 +99,9 @@
     <ClCompile Include="DateTime.c">
       <Filter>Source Files\Functions</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuD4_3.c">
+      <Filter>Source Files\Menu\MainMenuD\MainMenuD4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Modules.h">

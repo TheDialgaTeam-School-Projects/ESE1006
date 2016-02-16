@@ -46,7 +46,8 @@ void showMenuD4(void)
 				break;
 
 			case 3:
-				
+				showMenuD4_3();
+				displayMenuD4();
 				break;
 
 			case 4:

@@ -11,7 +11,6 @@ void displayMenuD1(int* menuCount)
 {
 	int i;
 	int expectedRainfallCategoryListCount = rainfallCategoryListCount();
-	string expectedCategory;
 
 	printHeader("D1. Rainfall database manager - View Rainfall database.");
 	printf("Please select the category list from options 1 to %d that you want to display.\n", expectedRainfallCategoryListCount);
@@ -20,10 +19,8 @@ void displayMenuD1(int* menuCount)
 
 	for (i = 0; i < expectedRainfallCategoryListCount; i++)
 	{
-		expectedCategory = rainfallCategoryListGetItem(i);
-		printf("%d. %s\n", *menuCount, expectedCategory);
-		stringDispose(expectedCategory);
-		*menuCount++;
+		printf("%d. %s\n", *menuCount, rainfallCategoryListGetItem(i));
+		*menuCount = *menuCount + 1;
 	}
 
 	printf("%d. Go back to Rainfall database manager menu.\n", *menuCount);
@@ -41,13 +38,13 @@ void displayMenuD1Year(int* menuCount, int categoryIndex, int* yearRefIndex)
 
 	*menuCount = 1;
 
-	for (year = 0; year < rainfallYearListCapacity(); year++)
+	for (year = 0; year < rainfallYearListGetCapacity(); year++)
 	{
 		if (rainfallMonthListCount(categoryIndex, year) > 0)
 		{
 			printf("%d. %d\n", *menuCount, year + START_YEAR);
 			yearRefIndex[*menuCount - 1] = year;
-			*menuCount++;
+			*menuCount = *menuCount + 1;
 		}
 	}
 
@@ -66,13 +63,13 @@ void displayMenuD1Month(int* menuCount, int categoryIndex, int yearIndex, int* m
 
 	*menuCount = 1;
 
-	for (month = 0; month < rainfallMonthListCapacity(); month++)
+	for (month = 0; month < rainfallMonthListGetCapacity(); month++)
 	{
 		if (rainfallDayListCount(categoryIndex, yearIndex, month) > 0)
 		{
-			printf("%d. %d\n", *menuCount, getMonthName(month + 1));
+			printf("%d. %s\n", *menuCount, getMonthName(month + 1));
 			monthRefIndex[*menuCount - 1] = month;
-			*menuCount++;
+			*menuCount = *menuCount + 1;
 		}
 	}
 
@@ -156,7 +153,7 @@ void showMenuD1Month(int categoryIndex, int yearIndex)
 
 			for (day = 0; day < expectedRainfallDayListCount; day++)
 			{
-				printf("%7.1f", rainfallArrayListGetItem(categoryIndex, yearIndex, monthIndex, day));
+				printf("%7.1f", rainfallDayListGetItem(categoryIndex, yearIndex, monthIndex, day));
 
 				if ((day == 10 - 1 || day == 20 - 1 || day == 30 - 1) && day != expectedRainfallDayListCount - 1)
 				{

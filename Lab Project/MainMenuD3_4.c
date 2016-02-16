@@ -12,8 +12,6 @@ void showMenuD3_4(void)
 	printHeader("D3.4. Rainfall database manager - Reset to factory default.");
 
 	rainfallCategoryListClear();
-	rainfallArrayListClear();
-	rainfallActiveListClear();
 
 	puts("Successfully reset to factory default!");
 	pause();
