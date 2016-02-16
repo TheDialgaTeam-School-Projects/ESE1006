@@ -31,6 +31,33 @@ void displayMenuD1(int* menuCount)
 }
 
 // A function to show menu D1.
+void displayMenuD1Year(int* menuCount, int categoryIndex, int* yearRefIndex)
+{
+	int year;
+	int j;
+	int expectedRainfallYearListCount = rainfallYearListYearCount(categoryIndex);
+
+	printHeader("D1. Rainfall database manager - View Rainfall database.");
+	printf("Please select the year from options 1 to %d that you want to display.\n", expectedRainfallYearListCount);
+
+	*menuCount = 1;
+
+	for (year = 0; year < rainfallYearListCapacity(); year++)
+	{
+		if (rainfallMonthListCount(categoryIndex, year) > 0)
+		{
+			printf("%d. %d\n", *menuCount, year + START_YEAR);
+			yearRefIndex[*menuCount - 1] = year;
+			*menuCount++;
+			break;
+		}
+	}
+
+	printf("%d. Go back to category list selection.\n", *menuCount);
+	printHash();
+}
+
+// A function to show menu D1.
 void showMenuD1(void)
 {
 	int menuCount = 1;
@@ -55,37 +82,7 @@ void showMenuD1(void)
 }
 
 // A function to show menu D1.
-void displayMenuD1Year(int nameRefIndex, struct yearRefIndexMenu* yearRefIndexMenuD1)
-{
-	int i;
-	int j;
-	int expectedRainfallActiveListCount = rainfallActiveListYearCount(nameRefIndex);
-
-	printHeader("D1. Rainfall database manager - View Rainfall database.");
-	printf("Please select the year from options 1 to %d that you want to display.\n", expectedRainfallActiveListCount);
-
-	yearRefIndexMenuD1->numberOfMenu = 1;
-
-	for (i = 0; i < END_YEAR - START_YEAR + 1; i++)
-	{
-		for (j = 0; j < 12; j++)
-		{
-			if (rainfallActiveListGetItem(nameRefIndex, i, j) == true)
-			{
-				printf("%d. %d\n", yearRefIndexMenuD1->numberOfMenu, i + START_YEAR);
-				yearRefIndexMenuD1->yearRefIndex[yearRefIndexMenuD1->numberOfMenu - 1] = i;
-				yearRefIndexMenuD1->numberOfMenu++;
-				break;
-			}
-		}
-	}
-
-	printf("%d. Go back to category list selection.\n", yearRefIndexMenuD1->numberOfMenu);
-	printHash();
-}
-
-// A function to show menu D1.
-void showMenuD1Year(int categoryIndex)
+void showMenuD1Year(int* categoryCount, int categoryIndex, int* yearRefIndex)
 {
 	int i;
 	int j;
