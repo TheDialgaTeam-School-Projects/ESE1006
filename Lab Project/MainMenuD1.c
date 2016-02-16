@@ -7,7 +7,7 @@
 #include "Modules.h"
 
 // A function to show menu D1.
-void displayMenuD1(int* menuCount, int* categoryRefIndex)
+void displayMenuD1(int* menuCount)
 {
 	int i;
 	int expectedRainfallCategoryListCount = rainfallCategoryListCount();
@@ -23,7 +23,6 @@ void displayMenuD1(int* menuCount, int* categoryRefIndex)
 		expectedCategory = rainfallCategoryListGetItem(i);
 		printf("%d. %s\n", *menuCount, expectedCategory);
 		stringDispose(expectedCategory);
-		categoryRefIndex[*menuCount - 1] = i;
 		*menuCount++;
 	}
 
@@ -35,10 +34,9 @@ void displayMenuD1(int* menuCount, int* categoryRefIndex)
 void showMenuD1(void)
 {
 	int menuCount = 1;
-	int categoryRefIndex[rainfallCategoryListCount()];
 	int menuOptions;
 
-	displayMenuD1(&menuCount, categoryRefIndex);
+	displayMenuD1(&menuCount);
 
 	do
 	{
@@ -49,7 +47,7 @@ void showMenuD1(void)
 		else if (menuOptions < menuCount)
 		{
 			showMenuD1Year(menuOptions - 1);
-			displayMenuD1(&menuCount, categoryRefIndex);
+			displayMenuD1(&menuCount);
 		}
 		else
 			break;
