@@ -210,6 +210,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MainMenuD4_1.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MainMenuD4_2.c">
       <SubType>
       </SubType>

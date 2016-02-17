@@ -25,8 +25,7 @@ void showMenuD4(void)
 	int menuOptions;
 	char tempString[CMD_MAX + 1] = "start explorer.exe select,\"";
 
-	strcat(tempString, getcwd('\0', 0));
-	strcat(tempString, "\\Database\"");
+	stringConcat(tempString, getcwd('\0', 0), "\\Database\"", NULL);
 
 	displayMenuD4();
 
@@ -37,7 +36,8 @@ void showMenuD4(void)
 		switch (menuOptions)
 		{
 			case 1:
-				
+				showMenuD4_1();
+				displayMenuD4();
 				break;
 
 			case 2:

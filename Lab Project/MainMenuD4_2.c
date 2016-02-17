@@ -25,18 +25,18 @@ void showMenuD4_2(void)
 	else
 		puts("> Directory existed, skipping.");
 
+	// Get filename.
+	stringCopy(filename, "Database\\Database.csv", NULL);
+
+	// Create a file. Give writing permission.
+	file = fopen(filename, "w+");
+
+	fputs("Category,Year,Month,Day,Daily Rainfall Total (mm)\n", file);
+	fflush(file);
+
 	for (i = 0; i < rainfallCategoryListCount(); i++)
 	{
-		// Get filename.
-		stringCopy(filename, "Database\\", rainfallCategoryListGetItem(i), ".csv", NULL);
-
-		// Create a file. Give writing permission.
-		file = fopen(filename, "w+");
-		
-		fputs("Category,Year,Month,Day,Daily Rainfall Total (mm)\n", file);
-		fflush(file);
-
-		printf("> Exporting database (%d / %d) %.2f%%\n", i + 1, rainfallCategoryListCount(), (i + 1) / rainfallCategoryListCount() * 100.0);
+		printf("> Exporting database (%d / %d) %.2f%%\n", i + 1, rainfallCategoryListCount(), (i + 1.0) / rainfallCategoryListCount() * 100.0);
 
 		for (year = 0; year < rainfallYearListGetCapacity(); year++)
 		{
@@ -54,10 +54,9 @@ void showMenuD4_2(void)
 				}
 			}
 		}
-		
-		fclose(file);
 	}
 
+	fclose(file);
 	printf("> Database exported at: %s%s\n", WORKING_DIR, "\\Database");
 	pause();
 }

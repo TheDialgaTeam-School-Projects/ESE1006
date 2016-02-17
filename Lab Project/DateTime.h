@@ -17,7 +17,7 @@
 #define START_YEAR 1900
 
 // End of the year value.
-#define END_YEAR 9999
+#define END_YEAR 2038
 
 // Get the name of the month.
 string getMonthName(int month);
