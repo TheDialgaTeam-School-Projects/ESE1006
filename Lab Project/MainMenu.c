@@ -10,12 +10,19 @@
 void displayMenu(void)
 {
 	printHeader("Rainfall Viewer 1 - Main Menu");
-	puts("Please select an option.");
-	puts("For options A to C, additional category is not supported.\n");
+	puts("Please select an option.\n");
+
+	puts("For options A to C, additional category is not supported.");
 	puts("A. Display the average rainfall of a selected month.");
 	puts("B. Display the maximum rainfalls among all the months.");
-	puts("C. Display the month with the lowest average rainfall and the value for all months.");
-	puts("D. Rainfall database manager. (Require Password upon first session)");
+	puts("C. Display the month with the lowest average rainfall and the values for all months.\n");
+
+	puts("D. Rainfall database manager. (Require Password for first session)\n");
+
+	puts("For options E to F, additional features are supported.");
+	puts("E. Display the maximum rainfall among all the months.");
+	puts("F. Display the month with the lowest/highest average rainfall and the average for all months.\n");
+
 	puts("Q. Exit.");
 	printHash();
 }
@@ -56,6 +63,16 @@ void showMainMenu(void)
 				showMenuD();
 				displayMenu();
 				break;
+
+			case 'E':
+			case 'e':
+				showMenuE();
+				displayMenu();
+
+			case 'F':
+			case 'f':
+				showMenuF();
+				displayMenu();
 
 			case 'Q':
 			case 'q':

@@ -37,6 +37,9 @@ int stringToInt(string value);
 // Convert string to float.
 float stringToFloat(string value);
 
+// Determines whether two String objects have the same value.
+bool stringEquals(string item, string item2);
+
 // Dispose the string.
 void stringDispose(string item);
 #endif

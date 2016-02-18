@@ -105,6 +105,12 @@
     <ClCompile Include="MainMenuD4_1.c">
       <Filter>Source Files\Menu\MainMenuD\MainMenuD4</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuE.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuF.c">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Modules.h">

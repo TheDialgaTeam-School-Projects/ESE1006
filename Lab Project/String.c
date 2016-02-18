@@ -105,7 +105,7 @@ string stringGetSplit(string item, int index, char seperator)
 
 	for (i = 0; i < expectedCapacity; i++)
 	{
-		if (item[i] == '\0' || currentIndex > expectedIndex)
+		if (item[i] == '\0' || item[i] == '\n' || currentIndex > expectedIndex)
 			break;
 		else if (item[i] == seperator)
 			currentIndex++;
@@ -217,7 +217,9 @@ float stringToFloat(string value)
 				break;
 			else if (i == 0 && value[i] == '-')
 				isNegative = true;
-			else if ((expectedLength == 1 && value[i] == '—') || (i > 0 && value[i] == '-') || (i > 0 && value[i] == '.' && isDecimal) || (!isdigit(value[i]) && value[i] != '-' && value[i] != '.'))
+			else if (value[i] == '\n' || value[i] == '—')
+				continue;
+			else if ((i > 0 && value[i] == '-') || (i > 0 && value[i] == '.' && isDecimal) || (!isdigit(value[i]) && value[i] != '-' && value[i] != '.'))
 			{
 				return 0;
 			}
@@ -230,11 +232,26 @@ float stringToFloat(string value)
 				returnValue += (value[i] - '0') / pow(10, decimalAppendIndex + 1);
 				decimalAppendIndex++;
 			}
-
 		}
 	} while (!canReturn);
 
 	return isNegative ? returnValue * -1 : returnValue;
+}
+
+// Determines whether two String objects have the same value.
+bool stringEquals(string item, string item2)
+{
+	int i = 0;
+
+	while (item[i] != '\0' && item2[i] != '\0')
+	{
+		if (item[i] != item2[i])
+			return false;
+
+		i++;
+	}
+
+	return true;
 }
 
 // Dispose the string.

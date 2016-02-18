@@ -16,6 +16,7 @@ void showMenuD4_1(void)
 	string tempLineText = stringInit(CMD_MAX + 1);
 	string tempGetSplit;
 
+	int i;
 	int tempYear;
 	int tempMonth;
 	int tempDay;
@@ -23,6 +24,7 @@ void showMenuD4_1(void)
 
 	bool isCategoryAdded = false;
 	bool isFirstLine = false;
+	bool isNewCategory = false;
 
 	printHeader("D4.1. Rainfall database manager - Import database.");
 
@@ -63,11 +65,25 @@ void showMenuD4_1(void)
 
 				if (!isCategoryAdded)
 				{
-					tempCategoryName = stringGetSplit(tempLineText, 0, ',');
-					rainfallCategoryListAdd(tempCategoryName);
-					stringDispose(tempCategoryName);
+					rainfallCategoryListClear();
 					isCategoryAdded = true;
 				}
+
+				isNewCategory = true;
+				tempCategoryName = stringGetSplit(tempLineText, 0, ',');
+
+				for (i = 0; i < rainfallCategoryListCount(); i++)
+				{
+					if (stringEquals(tempCategoryName, rainfallCategoryListGetItem(i)))
+					{
+						isNewCategory = false;
+						break;
+					}
+				}
+
+				if (isNewCategory)
+					rainfallCategoryListAdd(tempCategoryName);
+				stringDispose(tempCategoryName);
 
 				tempGetSplit = stringGetSplit(tempLineText, 1, ',');
 				tempYear = stringToInt(tempGetSplit);
@@ -86,14 +102,12 @@ void showMenuD4_1(void)
 				stringDispose(tempGetSplit);
 
 				rainfallDayListSetItem(rainfallCategoryListCount() - 1, tempYear - START_YEAR, tempMonth - 1, tempDay - 1, tempValue);
-
-				if (getDayCount(tempYear, tempMonth) == tempDay)
-					break;
 			}
 		} while (tempLineText != NULL);
-	}
 
-	fclose(file);
+		fclose(file);
+	}
+	
 	puts("> Database imported!");
 	system("pause");
 }

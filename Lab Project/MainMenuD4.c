@@ -14,6 +14,7 @@ void displayMenuD4(void)
 	puts("1. Import database.");
 	puts("2. Export database.");
 	puts("3. Sync database with internet server.");
+	puts("WARNING: The operation might take a while to complete depending on the internet speed!");
 	puts("4. Open database directory.");
 	puts("5. Go back to Rainfall database manager menu.");
 	printHash();

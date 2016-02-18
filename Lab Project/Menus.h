@@ -68,4 +68,22 @@ void showMenuD4_2(void);
 
 // A function to show menu D4.3.
 void showMenuD4_3(void);
+
+// A function to show menu E.
+void showMenuE(void);
+
+// A function to show menu E.
+void showMenuEYear(int categoryIndex);
+
+// A function to show menu E.
+void showMenuEMonth(int categoryIndex, int yearIndex);
+
+// A function to show menu F.
+void showMenuF(void);
+
+// A function to show menu F.
+void showMenuFYear(int categoryIndex);
+
+// A function to show menu F.
+void showMenuFMonth(int categoryIndex, int yearIndex);
 #endif
